@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Working Clock</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: #2f363e;
+        }
+        
+        .container {
+            position: relative;
+            /* min-height: 500px; */
+            border-radius: 20px;
+            border-top-left-radius: 225px;
+            border-top-right-radius: 225px;
+            background: #2f363e;
+            box-shadow: 5px 25px 75px rgba(0, 0, 0, .75), 10px 50px 70px rgba(0, 0, 0, .25), inset 5px 5px 10px rgba(0, 0, 0, .5), inset 5px 5px 20px rgba(255, 255, 255, .2), inset -5px -5px 15px rgba(0, 0, 0, .75);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+        
+        .clock {
+            position: relative;
+            width: 450px;
+            height: 450px;
+            background-color: #2f363e;
+            border-radius: 50%;
+            box-shadow: 10px 50px 70px rgba(0, 0, 0, .25), inset 5px 5px 10px rgba(0, 0, 0, .5), inset 5px 5px 20px rgba(255, 255, 255, .2), inset -5px -5px 15px rgba(0, 0, 0, .75);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+        
+        .clock::before {
+            z-index: 1000;
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background-color: #2f363e;
+            border: 3px solid #fff;
+            border-radius: 50%;
+        }
+        
+        .clock span {
+            position: absolute;
+            inset: 20px;
+            color: #fff;
+            text-align: center;
+            transform: rotate(calc(30deg * var(--i)));
+        }
+        
+        .clock span b {
+            font-size: 2em;
+            opacity: .25;
+            font-weight: 600;
+            display: inline-block;
+            transform: rotate(calc(-30deg * var(--i)));
+        }
+        
+        .circle {
+            width: 66.66%;
+            height: 66.66%;
+            border: 2px solid rgba(0, 0, 0, .25);
+            position: absolute;
+            border-radius: 50%;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+        }
+        
+        .circle i {
+            position: absolute;
+            width: 6px;
+            height: 50%;
+            z-index: 10;
+            background-color: var(--clr);
+            opacity: 0.5;
+            transform-origin: bottom;
+            transform: scaleY(0.5);
+        }
+        
+        .circle:nth-child(1) i {
+            width: 2px;
+        }
+        
+        .circle:nth-child(2) i {
+            width: 4px;
+        }
+        
+        .circle:nth-child(3) i {
+            width: 6px;
+        }
+        
+        .circle.circle2 {
+            width: 53.33%;
+            height: 55.33%;
+            z-index: 9;
+        }
+        
+        .circle.circle3 {
+            width: 40%;
+            height: 40%;
+            z-index: 8;
+        }
+        
+        .circle::before {
+            content: '';
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            top: -8px;
+            border-radius: 50%;
+            box-shadow: 0px 0px 20px var(--clr);
+            background: var(--clr);
+        }
+        
+        #time {
+            position: relative;
+            display: flex;
+            margin-bottom: 40px;
+            padding: 10px 20px;
+            font-size: 2em;
+            font-weight: 600;
+            border: 2px solid rgba(0, 0, 0, .5);
+            border-radius: 40px;
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, .5), inset 5px 5px 20px rgba(255, 255, 255, .2), inset -5px -5px 15px rgba(0, 0, 0, .7);
+        }
+        
+        #time div {
+            width: 60px;
+            text-align: center;
+            font-weight: 500;
+            position: relative;
+            color: var(--clr);
+        }
+        
+        #time div:nth-child(1)::after,
+        #time div:nth-child(2)::after {
+            content: ':';
+            position: absolute;
+            right: -4px;
+        }
+        
+        #time div:last-child {
+            font-size: .6em;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+        }
+        
+        #time div:nth-child(2)::after {
+            animation: animate 1s steps(1) infinite;
+        }
+        
+        @keyframes animate {
+            0% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0;
+            }
+        }
+        
+        @media (max-width:557px) {
+            .container .clock {
+                height: 400px;
+                width: 400px !important;
+            }
+        }
+        
+        @media (max-width:400px) {
+            .container .clock {
+                height: 320px;
+                width: 320px !important;
+            }
+            .clock span b {
+                font-size: 1em;
+            }
+        }
+        
+        @media (max-width:350px) {
+            .container .clock {
+                height: 280px;
+                width: 280px !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+
+        <div class="container">
+            <div class="clock">
+
+                <div class="circle" style="--clr:#04fc43" id="sc"><i></i></div>
+                <div class="circle circle2" style="--clr:#fee800" id="mn"><i></i></div>
+                <div class="circle circle3" style="--clr:#ff2972" id="hr"><i></i></div>
+                <span style="--i:1"><b>1</b></span>
+                <span style="--i:2"><b>2</b></span>
+                <span style="--i:3"><b>3</b></span>
+                <span style="--i:4"><b>4</b></span>
+                <span style="--i:5"><b>5</b></span>
+                <span style="--i:6"><b>6</b></span>
+                <span style="--i:7"><b>7</b></span>
+                <span style="--i:8"><b>8</b></span>
+                <span style="--i:9"><b>9</b></span>
+                <span style="--i:10"><b>10</b></span>
+                <span style="--i:11"><b>11</b></span>
+                <span style="--i:12"><b>12</b></span>
+            </div>
+
+            <div id="time">
+
+                <div id="hour" style="--clr:#ff2972">00</div>
+                <div id="minutes" style="--clr:#fee800">00</div>
+                <div id="seconds" style="--clr:#04fc43">00</div>
+                <div id="ampn"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        let clockFunction = () => {
+            let hr = document.querySelector('#hr');
+            let mn = document.querySelector('#mn');
+            let sc = document.querySelector('#sc');
+
+            let deg = 6; // rotator
+            let day = new Date(); // current Date
+            let hh = day.getHours() * 30;
+            let mm = day.getMinutes() * deg;
+            let ss = day.getSeconds() * deg;
+
+            hr.style.transform = `rotateZ(${hh+(mm/12)}deg)`;
+            mn.style.transform = `rotateZ(${mm}deg)`;
+            sc.style.transform = `rotateZ(${ss}deg)`;
+
+        }
+        setInterval(clockFunction, 1000);
+
+        let hours = document.querySelector('#hour');
+        let minutes = document.querySelector('#minutes');
+        let seconds = document.querySelector('#seconds');
+        let ampn = document.querySelector('#ampn');
+
+        let h = new Date().getHours();
+        let m = new Date().getMinutes();
+        let s = new Date().getSeconds();
+        let am = h >= 12 ? "PM" : "AM"
+
+        if (h > 12) {
+            h = h - 12;
+        }
+
+        h = (h < 10) ? "0" + h : h;
+        m = (m < 10) ? "0" + m : m;
+        s = (s < 10) ? "0" + s : s;
+
+        hours.innerHTML = h;
+        minutes.innerHTML = m;
+        seconds.innerHTML = s;
+        ampn.textContent = am;
+    </script>
+</body>
+
+</html>
