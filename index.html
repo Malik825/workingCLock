@@ -257,31 +257,32 @@
             mn.style.transform = `rotateZ(${mm}deg)`;
             sc.style.transform = `rotateZ(${ss}deg)`;
 
+
+            let hours = document.querySelector('#hour');
+            let minutes = document.querySelector('#minutes');
+            let seconds = document.querySelector('#seconds');
+            let ampn = document.querySelector('#ampn');
+
+            let h = new Date().getHours();
+            let m = new Date().getMinutes();
+            let s = new Date().getSeconds();
+            let am = h >= 12 ? "PM" : "AM"
+
+            if (h > 12) {
+                h = h - 12;
+            }
+
+            h = (h < 10) ? "0" + h : h;
+            m = (m < 10) ? "0" + m : m;
+            s = (s < 10) ? "0" + s : s;
+
+            hours.innerHTML = h;
+            minutes.innerHTML = m;
+            seconds.innerHTML = s;
+            ampn.textContent = am;
+
         }
         setInterval(clockFunction, 1000);
-
-        let hours = document.querySelector('#hour');
-        let minutes = document.querySelector('#minutes');
-        let seconds = document.querySelector('#seconds');
-        let ampn = document.querySelector('#ampn');
-
-        let h = new Date().getHours();
-        let m = new Date().getMinutes();
-        let s = new Date().getSeconds();
-        let am = h >= 12 ? "PM" : "AM"
-
-        if (h > 12) {
-            h = h - 12;
-        }
-
-        h = (h < 10) ? "0" + h : h;
-        m = (m < 10) ? "0" + m : m;
-        s = (s < 10) ? "0" + s : s;
-
-        hours.innerHTML = h;
-        minutes.innerHTML = m;
-        seconds.innerHTML = s;
-        ampn.textContent = am;
     </script>
 </body>
 
